@@ -1,126 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Elon Musk Fan Parody 🚀</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elon Musk Fan Hub 🚀</title>
 
-  <!-- Parody disclaimer (IMPORTANT) -->
-  <meta name="description" content="A parody fan page. Not affiliated with Elon Musk, Meta, Facebook, Tesla, or X." />
+<meta name="description" content="Official fan parody hub for Elon Musk enthusiasts. Not affiliated with Elon Musk, Tesla, SpaceX, Meta, or Facebook.">
 
-  <!-- Facebook Open Graph -->
-  <meta property="og:title" content="Elon Musk Fan Parody 🚀" />
-  <meta property="og:description" content="Fans react, comment, and share Elon parody posts." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://YOUR-PAGE.pages.dev" />
+<!-- Facebook Open Graph -->
+<meta property="og:title" content="Elon Musk Fan Hub 🚀">
+<meta property="og:description" content="React, comment, and share Elon Musk parody fan posts!">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://YOUR-PAGE.pages.dev">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
-    }
-    header {
-      background: #1877f2;
-      color: white;
-      padding: 14px;
-      font-size: 20px;
-      text-align: center;
-    }
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 0 10px;
-    }
-    .post {
-      background: white;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.1);
-    }
-    .author {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .content {
-      margin: 10px 0;
-      font-size: 16px;
-    }
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-    }
-    .disclaimer {
-      font-size: 12px;
-      color: #555;
-      text-align: center;
-      margin-top: 40px;
-    }
-  </style>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: #f0f2f5; }
+  header {
+    background: #1877f2;
+    color: white;
+    padding: 18px;
+    font-size: 1.7rem;
+    text-align: center;
+    font-weight: bold;
+  }
+  .verified {
+    display: inline-block;
+    font-size: 1.2rem;
+    vertical-align: middle;
+    margin-left: 6px;
+    animation: pulse 2s infinite;
+    cursor: default;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .container { max-width: 650px; margin: 20px auto; padding: 0 10px; }
+  .followers { text-align:center; font-size:18px; margin:15px 0; color:#4267B2; }
+  .avatars { text-align:center; margin-bottom:20px; }
+  .avatars img { width:40px; border-radius:50%; margin:2px; }
+  .post { background: white; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 25px; }
+  .author { font-weight: bold; margin-bottom: 6px; color: #4267B2; }
+  .content { margin-bottom: 12px; font-size: 16px; line-height: 1.4; }
+  .post img { max-width: 100%; border-radius: 8px; margin: 10px 0; }
+  .actions { display: flex; justify-content: flex-start; gap: 10px; margin-bottom: 10px; }
+  .disclaimer { font-size: 12px; color: #555; text-align: center; margin-top: 40px; }
+</style>
 </head>
-
 <body>
 
-<!-- Facebook SDK (NO APP ID REQUIRED) -->
+<!-- Facebook SDK -->
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
+<script async defer crossorigin="anonymous" 
   src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
 </script>
 
-<header>Elon Musk Fan Parody 🚀</header>
+<header>
+  Elon Musk Fan Hub <span class="verified" title="Official Parody Fan Hub">🔵✔️</span>
+</header>
 
 <div class="container">
+  <!-- Followers -->
+  <div class="followers">
+    <span id="follower-count">0</span> Followers
+  </div>
+  <div class="avatars">
+    <img src="https://i.imgur.com/1.png">
+    <img src="https://i.imgur.com/2.png">
+    <img src="https://i.imgur.com/3.png">
+    <img src="https://i.imgur.com/4.png">
+    <img src="https://i.imgur.com/5.png">
+    <img src="https://i.imgur.com/6.png">
+  </div>
+</div>
 
-  <!-- POST 1 -->
-  <div class="post">
-    <div class="author">Elon Musk (Parody)</div>
-    <div class="content">
-      Just launched my Tesla into orbit again. Mars parking fees are getting expensive.
-    </div>
+<div class="container" id="feed"></div>
 
-    <!-- REAL FACEBOOK SHARE -->
+<script>
+const BASE_URL = "https://YOUR-PAGE.pages.dev";
+
+// Animate Followers
+const followerCountEl = document.getElementById('follower-count');
+let count = 0;
+const target = 50000;
+const increment = Math.ceil(target / 100);
+const interval = setInterval(() => {
+  count += increment;
+  if(count >= target){ count = target; clearInterval(interval); }
+  followerCountEl.textContent = count.toLocaleString();
+}, 20);
+
+// Elon posts
+const posts = [
+  {id:1, author:"Elon Musk (Parody)", content:"SpaceX Starship successfully tested again! Mars fans, ready your rocket emojis! 🛸🚀", img:"https://i.imgur.com/jYF2tXb.jpg"},
+  {id:2, author:"Elon Musk (Parody)", content:"Tesla fans, imagine a flamethrower that makes your coffee while you drive. ☕🔥", img:"https://i.imgur.com/v7kQ6wP.jpg"},
+  {id:3, author:"Elon Musk (Parody)", content:"Neuralink update: Skip meetings with your brain! 🤯💡 Who’s testing it first?", img:"https://i.imgur.com/PSYxR8b.jpg"},
+  {id:4, author:"Elon Musk (Parody)", content:"Dogecoin to the Moon! 🚀🐶 Fans, get your rocket emojis ready!", img:"https://i.imgur.com/8k8wZQt.jpg"},
+  {id:5, author:"Elon Musk (Parody)", content:"Elon’s secret project: Teleportation prototype tested! Fans, grab your emojis 🛸💨", img:"https://i.imgur.com/9Qi0J5Y.jpg"}
+];
+
+const feed = document.getElementById('feed');
+
+posts.forEach(post => {
+  const postEl = document.createElement('div');
+  postEl.classList.add('post');
+  const postUrl = `${BASE_URL}/?post=${post.id}`;
+  postEl.innerHTML = `
+    <div class="author">${post.author} <span class="verified" title="Official Parody Fan Post">🔵✔️</span></div>
+    <div class="content">${post.content}</div>
+    <img src="${post.img}" alt="Elon meme">
     <div class="actions">
-      <div class="fb-share-button"
-        data-href="https://YOUR-PAGE.pages.dev"
-        data-layout="button_count">
-      </div>
+      <div class="fb-share-button" data-href="${postUrl}" data-layout="button_count"></div>
     </div>
+    <div class="fb-comments" data-href="${postUrl}" data-width="100%" data-numposts="5"></div>
+  `;
+  feed.appendChild(postEl);
+});
 
-    <!-- REAL FACEBOOK COMMENTS -->
-    <div class="fb-comments"
-      data-href="https://YOUR-PAGE.pages.dev/post1"
-      data-width="100%"
-      data-numposts="5">
-    </div>
+// Fan Chat Room
+const chatEl = document.createElement('div');
+chatEl.classList.add('post');
+chatEl.innerHTML = `
+  <div class="author">Fan Chat Room <span class="verified" title="Verified Chat Room">🔵✔️</span></div>
+  <div class="content">Chat with other Elon Musk fans in real-time! 🚀</div>
+  <div style="height:400px;width:100%;">
+    <iframe src="https://chatango.com/embed/chat?f=elonfanroom" style="width:100%; height:400px; border:0;"></iframe>
   </div>
+`;
+feed.appendChild(chatEl);
+</script>
 
-  <!-- POST 2 -->
-  <div class="post">
-    <div class="author">Elon Musk (Parody)</div>
-    <div class="content">
-      Working on a Neuralink update so humans can skip meetings mentally.
-    </div>
-
-    <div class="actions">
-      <div class="fb-share-button"
-        data-href="https://YOUR-PAGE.pages.dev"
-        data-layout="button_count">
-      </div>
-    </div>
-
-    <div class="fb-comments"
-      data-href="https://YOUR-PAGE.pages.dev/post2"
-      data-width="100%"
-      data-numposts="5">
-    </div>
-  </div>
-
-  <div class="disclaimer">
-    This site is a parody fan page. Not affiliated with Elon Musk, Meta, Facebook, Tesla, X, or SpaceX.
-  </div>
-
+<div class="disclaimer">
+This page is a parody fan hub for Elon Musk enthusiasts. Not affiliated with Elon Musk, Tesla, SpaceX, Meta, or Facebook.
 </div>
 
 </body>
